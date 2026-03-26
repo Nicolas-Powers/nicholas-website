@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sweet Scoops Creamery</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: #fff9f5;
+    color: #333;
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(90deg, #ff758c, #ff7eb3, #ff4f81);
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  header .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    font-weight: 700;
+    font-size: 2rem;
+    user-select: none;
+  }
+  header .logo span.emoji {
+    background: white;
+    color: #ff4f81;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+  nav {
+    display: flex;
+    gap: 25px;
+  }
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: opacity 0.3s ease;
+  }
+  nav a:hover,
+  nav a:focus {
+    opacity: 0.8;
+  }
+  .cart {
+    background: white;
+    color: #ff4f81;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(255,79,129,0.3);
+    user-select: none;
+  }
+  #write-review-btn {
+    margin-left: 20px;
+    background: white;
+    color: #ff4f81;
+    font-weight: 600;
+    border-radius: 25px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  #write-review-btn:hover {
+    background: #ffe6f0;
+  }
+  #write-review-btn-bottom {
+    background: linear-gradient(45deg, #ff4f81, #ff758c);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  #write-review-btn-bottom:hover {
+    background: linear-gradient(45deg, #e84370, #ff4f81);
+  }
+  .hero {
+    height: 85vh;
+    background:
+      linear-gradient(rgba(255,127,146,0.4), rgba(255,127,146,0.4)),
+      url("https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1800&q=80") center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+  }
+
+  .hero h1 {
+    font-size: 3.5rem;
+    max-width: 900px;
+    background: rgba(0,0,0,0.45);
+    padding: 24px 40px;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  }
+  section {
+    padding: 80px 10%;
+    max-width: 1200px;
+    margin: 0 auto 60px auto;
+  }
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #ff4f81;
+    text-align: center;
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 30px;
+  }
+  .card {
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover,
+  .card:focus-within {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 15px 35px rgba(255,79,129,0.3);
+  }
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center center;
+    transition: transform 0.3s ease;
+  }
+  .card img.frame-up-five {
+    object-position: center 35%;
+  }
+  .card img.frame-down-five {
+    object-position: center 20%;
+  }
+  .card img.vanilla-up-ten {
+    object-position: center 40%;
+  }
+  .card img.caramel-up-ten {
+    object-position: center 35%;
+  }
+  .card img.cotton-candy-up-ten {
+    object-position: center 20%;
+  }
+  .card:hover img,
+  .card:focus-within img {
+    transform: scale(1.07);
+  }
+  .card-content {
+    padding: 20px 24px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: #ff4f81;
+  }
+  .price {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #ff758c;
+    margin-bottom: 16px;
+  }
+  button {
+    background: linear-gradient(45deg, #ff4f81, #ff758c);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 12px;
+    cursor: pointer;
+    transition: background 0.4s ease, box-shadow 0.3s ease;
+    user-select: none;
+  }
+  button:hover,
+  button:focus {
+    background: linear-gradient(45deg, #e84370, #ff4f81);
+    box-shadow: 0 6px 15px rgba(232,67,112,0.6);
+    outline: none;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 20px;
+  }
+  .gallery-grid img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 18px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+  }
+  .gallery-grid img:hover,
+  .gallery-grid img:focus {
+    transform: scale(1.07);
+    box-shadow: 0 12px 25px rgba(255,79,129,0.3);
+    outline: none;
+  }
+  #map-section iframe {
+    width: 100%;
+    height: 400px;
+    border: none;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(255,127,146,0.15);
+  }
+  #contact form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  input, textarea {
+    border: 1.5px solid #ccc;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    resize: vertical;
+  }
+  input:focus, textarea:focus {
+    border-color: #ff4f81;
+    box-shadow: 0 0 10px rgba(255,79,129,0.4);
+    outline: none;
+  }
+  #contact button {
+    align-self: center;
+    max-width: 180px;
+  }
+  footer {
+    background: linear-gradient(90deg, #ff758c, #ff7eb3, #ff4f81);
+    color: white;
+    text-align: center;
+    padding: 20px 15px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    user-select: none;
+  }
+  @media (max-width: 600px) {
+    .hero h1 {
+      font-size: 2.2rem;
+      padding: 16px 24px;
+    }
+    header {
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 15px 20px;
+    }
+    nav {
+      gap: 15px;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  #reviews {
+    background: #fff0f5;
+    padding: 80px 10%;
+    max-width: 1200px;
+    margin: 0 auto 60px auto;
+    border-radius: 18px;
+  }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 30px;
+  }
+  .review-card {
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .review-card:hover,
+  .review-card:focus-within {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(255,79,129,0.2);
+  }
+  .review-text {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    flex-grow: 1;
+    color: #333;
+  }
+  .review-author {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #ff4f81;
+  }
+  .review-rating {
+    color: #ff758c;
+    font-size: 1.1rem;
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-content {
+    background-color: #fff;
+    padding: 30px 24px;
+    border-radius: 18px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+  }
+  .close-btn {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  #review-form input, #review-form textarea, #review-form select, #review-form button {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo" aria-label="Sweet Scoops Creamery logo">
+    <span class="emoji" aria-hidden="true">🍦</span>
+    Sweet Scoops
+  </div>
+  <nav aria-label="Primary navigation">
+    <a href="#menu">Menu</a>
+    <a href="#map-section">Visit</a>
+    <a href="#contact">Contact</a>
+    <a href="#reviews">Reviews</a>
+  </nav>
+  <div class="cart" aria-live="polite" aria-atomic="true" aria-label="Shopping cart">
+    Cart: <span id="cart-count">0</span>
+  </div>
+</header>
+
+<section class="hero" role="banner">
+  <h1>Welcome to Sweet Scoops Creamery</h1>
+</section>
+
+<section id="menu" aria-label="Ice cream menu">
+  <h2>Our Signature Flavors</h2>
+  <div class="menu-grid">
+
+    <article class="card" tabindex="0">
+      <img class="vanilla-up-ten" src="images/vanilla.png" alt="Vanilla Bean ice cream scoop" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;" />
+      <div class="card-content">
+        <h3>Vanilla Bean</h3>
+        <p class="price">$4.99</p>
+        <button type="button" onclick="addToCart()">Add to Cart</button>
+      </div>
+    </article>
+
+    <article class="card" tabindex="0">
+      <img class="frame-down-five" src="images/chocolate.png" alt="Chocolate Fudge ice cream scoop" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;" />
+      <div class="card-content">
+        <h3>Chocolate Fudge</h3>
+        <p class="price">$5.49</p>
+        <button type="button" onclick="addToCart()">Add to Cart</button>
+      </div>
+    </article>
+
+    <article class="card" tabindex="0">
+      <img class="frame-up-five" src="images/strawberry.png" alt="Strawberry Swirl ice cream scoop" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;" />
+      <div class="card-content">
+        <h3>Strawberry Swirl</h3>
+        <p class="price">$5.25</p>
+        <button type="button" onclick="addToCart()">Add to Cart</button>
+      </div>
+    </article>
+
+    <article class="card" tabindex="0">
+      <img class="frame-up-five" src="images/mint.png" alt="Mint Chocolate Chip ice cream scoop" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;" />
+      <div class="card-content">
+        <h3>Mint Chocolate Chip</h3>
+        <p class="price">$5.35</p>
+        <button type="button" onclick="addToCart()">Add to Cart</button>
+      </div>
+    </article>
+
+    <article class="card" tabindex="0">
+      <img class="frame-down-five" src="images/cookies.png" alt="Cookies and Cream ice cream scoop" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;" />
+      <div class="card-content">
+        <h3>Cookies and Cream</h3>
+        <p class="price">$5.45</p>
+        <button type="button" onclick="addToCart()">Add to Cart</button>
+      </div>
+    </article>
+
+    <article class="card" tabindex="0">
+      <img class="caramel-up-ten" src="images/caramel.png" alt="Caramel Swirl ice cream scoop" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;" />
+      <div class="card-content">
+        <h3>Caramel Swirl</h3>
+        <p class="price">$5.60</p>
+        <button type="button" onclick="addToCart()">Add to Cart</button>
+      </div>
+    </article>
+
+    <article class="card" tabindex="0">
+      <img class="cotton-candy-up-ten" src="images/cotton.png" alt="Cotton Candy ice cream scoop" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;" />
+      <div class="card-content">
+        <h3>Cotton Candy</h3>
+        <p class="price">$5.80</p>
+        <button type="button" onclick="addToCart()">Add to Cart</button>
+      </div>
+    </article>
+
+    <article class="card" tabindex="0">
+      <img src="images/banana.png" alt="Banana Split ice cream scoop" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;" />
+      <div class="card-content">
+        <h3>Banana Split</h3>
+        <p class="price">$5.90</p>
+        <button type="button" onclick="addToCart()">Add to Cart</button>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<section id="map-section" aria-label="Location map">
+  <h2>Visit Us</h2>
+  <iframe 
+    src="https://www.google.com/maps?q=Los+Angeles,+CA&output=embed" 
+    loading="lazy" 
+    title="Google Map showing Los Angeles"
+    allowfullscreen>
+  </iframe>
+</section>
+
+<section id="contact" aria-label="Contact form">
+  <h2>Contact Us</h2>
+  <form>
+    <input type="text" name="name" placeholder="Your Name" required aria-required="true" />
+    <input type="email" name="email" placeholder="Your Email" required aria-required="true" />
+    <textarea name="message" rows="5" placeholder="Your Message" required aria-required="true"></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<section id="reviews" aria-label="Customer reviews">
+  <h2>Customer Reviews</h2>
+  <div class="reviews-grid">
+    <article class="review-card" tabindex="0">
+      <p class="review-text">“The Mint Chocolate Chip is the creamiest I've ever tasted! Absolutely love it.”</p>
+      <p class="review-author">– Sarah J.</p>
+      <p class="review-rating">⭐⭐⭐⭐⭐</p>
+    </article>
+    <article class="review-card" tabindex="0">
+      <p class="review-text">“Vanilla Bean and Chocolate Fudge are heavenly. The flavors are so fresh!”</p>
+      <p class="review-author">– David L.</p>
+      <p class="review-rating">⭐⭐⭐⭐⭐</p>
+    </article>
+    <article class="review-card" tabindex="0">
+      <p class="review-text">“Banana Split is my favorite! Perfect for a hot summer day.”</p>
+      <p class="review-author">– Emily R.</p>
+      <p class="review-rating">⭐⭐⭐⭐</p>
+    </article>
+    <!-- Example project card with image in Projects section, if present -->
+    <!-- <article class="card" tabindex="0">
+      <img src="images/icecream-new.png" alt="Project example image" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;" />
+      <div class="card-content">
+        <h3>Project Example</h3>
+        <p class="price">$0.00</p>
+        <button type="button">View Project</button>
+      </div>
+    </article> -->
+  </div>
+  <div style="text-align:center; margin-top:30px;">
+    <button id="write-review-btn-bottom" type="button">Write a Review</button>
+  </div>
+</section>
+
+<footer role="contentinfo">
+  <p>© 2026 Sweet Scoops Creamery | 123 Main Street | Open 12PM–10PM</p>
+</footer>
+
+<div id="review-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h2>Write a Review</h2>
+    <form id="review-form">
+      <input type="text" id="reviewer-name" placeholder="Your Name" required />
+      <textarea id="review-text" placeholder="Your Review" rows="4" required></textarea>
+      <label for="review-stars">Rating:</label>
+      <select id="review-stars" required>
+        <option value="">Select Stars</option>
+        <option value="1">⭐</option>
+        <option value="2">⭐⭐</option>
+        <option value="3">⭐⭐⭐</option>
+        <option value="4">⭐⭐⭐⭐</option>
+        <option value="5">⭐⭐⭐⭐⭐</option>
+      </select>
+      <button type="submit">Submit Review</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  let cartCount = 0;
+  function addToCart() {
+    cartCount++;
+    document.getElementById('cart-count').textContent = cartCount;
+  }
+
+  const reviewBtn = document.getElementById('write-review-btn-bottom');
+  const modal = document.getElementById('review-modal');
+  const closeBtn = modal.querySelector('.close-btn');
+  const reviewForm = document.getElementById('review-form');
+
+  reviewBtn.addEventListener('click', () => {
+    modal.style.display = 'flex';
+  });
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) modal.style.display = 'none';
+  });
+
+  reviewForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('reviewer-name').value.trim();
+    const text = document.getElementById('review-text').value.trim();
+    const stars = document.getElementById('review-stars').value;
+    if(!name || !text || !stars) return;
+
+    const reviewGrid = document.querySelector('#reviews .reviews-grid');
+    const newReview = document.createElement('article');
+    newReview.classList.add('review-card');
+    newReview.setAttribute('tabindex','0');
+    newReview.innerHTML = `
+      <p class="review-text">“${text}”</p>
+      <p class="review-author">– ${name}</p>
+      <p class="review-rating">${'⭐'.repeat(stars)}</p>
+    `;
+    reviewGrid.appendChild(newReview);
+    modal.style.display = 'none';
+    reviewForm.reset();
+  });
+</script>
+
+</body>
+</html>

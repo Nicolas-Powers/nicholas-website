@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Startup Landing Page</title>
+
+<style>
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+margin:0;
+font-family:Poppins, sans-serif;
+background:#1c2c36;
+color:white;
+line-height:1.6;
+}
+
+/* NAVBAR */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 5%;
+background:linear-gradient(90deg,#1b2c3a,#1f3b4b);
+position:sticky;
+top:0;
+z-index:100;
+box-shadow:0 2px 10px rgba(0,0,0,0.3);
+}
+
+.logo{
+font-size:1.6rem;
+font-weight:bold;
+letter-spacing:1px;
+}
+
+.nav-links a{
+margin-left:25px;
+text-decoration:none;
+color:white;
+font-size:1rem;
+opacity:.85;
+transition:opacity .2s, transform .2s;
+}
+
+.nav-links a:hover{
+opacity:1;
+transform:translateY(-2px);
+}
+
+/* HERO */
+
+.hero{
+min-height:90vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:linear-gradient(135deg,#6dd5ed,#2193b0);
+color:white;
+padding:40px 20px;
+border-radius:10px;
+box-shadow:0 8px 20px rgba(0,0,0,0.3);
+margin:20px;
+}
+
+.hero h1{
+font-size:3.5rem;
+margin-bottom:15px;
+text-shadow:2px 2px 8px rgba(0,0,0,0.4);
+}
+
+.hero p{
+max-width:700px;
+font-size:1.2rem;
+margin-bottom:25px;
+text-shadow:1px 1px 5px rgba(0,0,0,0.3);
+}
+
+.btn{
+margin-top:20px;
+padding:15px 35px;
+border:none;
+border-radius:30px;
+background:#ff6b6b;
+color:white;
+cursor:pointer;
+font-size:1.05rem;
+transition:transform .2s, box-shadow .2s, background .3s;
+}
+
+.btn:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 24px rgba(0,0,0,0.4);
+background:#ff4757;
+}
+
+/* FEATURES */
+
+.features{
+padding:80px 10%;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:40px;
+}
+
+.feature{
+background:linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.1));
+padding:35px;
+border-radius:18px;
+text-align:center;
+transition:transform .25s, background .25s, box-shadow .25s;
+box-shadow:0 4px 15px rgba(0,0,0,0.2);
+}
+
+.feature:hover{
+transform:translateY(-8px);
+background:linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.15));
+box-shadow:0 8px 25px rgba(0,0,0,0.35);
+}
+
+.feature-icon{
+font-size:2.5rem;
+margin-bottom:15px;
+color:#ff6b6b;
+}
+
+/* TESTIMONIALS */
+
+.testimonials{
+padding:80px 10%;
+background:#1a2b36;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:35px;
+}
+
+.testimonial{
+background:linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.1));
+padding:30px;
+border-radius:15px;
+box-shadow:0 4px 15px rgba(0,0,0,0.2);
+transition:transform .25s, box-shadow .25s;
+}
+
+.testimonial:hover{
+transform:translateY(-5px);
+box-shadow:0 8px 25px rgba(0,0,0,0.3);
+}
+
+.testimonial p{
+font-style:italic;
+color:#ddd;
+}
+
+.testimonial h4{
+margin-top:15px;
+font-size:1rem;
+opacity:.85;
+}
+
+/* CTA */
+
+.cta{
+padding:80px 10%;
+text-align:center;
+background:#1f3a4b;
+border-radius:10px;
+box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+.cta h2{
+font-size:2.4rem;
+margin-bottom:15px;
+}
+
+.cta p{
+max-width:550px;
+margin:auto;
+margin-bottom:25px;
+color:#ddd;
+}
+
+/* FOOTER */
+
+footer{
+padding:40px 10%;
+text-align:center;
+background:#1b2d37;
+font-size:0.95rem;
+color:#bbb;
+box-shadow:0 -4px 15px rgba(0,0,0,0.2);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <div class="logo">🚀 SkillBoost</div>
+  <div class="nav-links">
+    <a href="#hero">Home</a>
+    <a href="#features">Features</a>
+    <a href="#cta">Join</a>
+  </div>
+</div>
+
+<section id="hero" class="hero">
+  <div class="hero-content">
+    <h1>Learn Anywhere, Anytime</h1>
+    <p>Join SkillBoost, the ultimate platform to level up your skills online. Explore thousands of courses and learn at your own pace.</p>
+    <button class="btn">Start Learning Today</button>
+  </div>
+</section>
+
+<section id="features" class="features">
+
+<div class="feature">
+<div class="feature-icon">📚</div>
+<h3>Extensive Courses</h3>
+<p>Access thousands of courses in technology, design, business, and more.</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">🎓</div>
+<h3>Expert Instructors</h3>
+<p>Learn from industry leaders and experienced professionals.</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">⏱️</div>
+<h3>Flexible Schedule</h3>
+<p>Learn at your own pace, anytime and anywhere.</p>
+</div>
+
+</section>
+
+<section class="testimonials">
+
+<div class="testimonial">
+<p>"SkillBoost helped me finally gain the skills I needed to land my dream job!"</p>
+<h4>— Taylor Morgan, Software Engineer</h4>
+</div>
+
+</section>
+
+<section id="cta" class="cta">
+<h2>Ready to Boost Your Skills?</h2>
+<p>Sign up for SkillBoost today and start learning from the best instructors online.</p>
+<button class="btn">Join SkillBoost</button>
+</section>
+
+</footer>
+</body>
+</html>

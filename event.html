@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Website Example</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+body { 
+  font-family: 'Poppins', sans-serif; 
+  margin:0; 
+  background:#f0f4f8; 
+  color:#333; 
+  line-height:1.6;
+}
+
+/* HEADER */
+header { 
+  background: linear-gradient(135deg,#6dd5ed,#2193b0); 
+  color:#fff; 
+  padding:60px 20px; 
+  text-align:center; 
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+header h1 { 
+  font-size:3rem; 
+  margin-bottom:10px; 
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+header p { 
+  font-size:1.2rem; 
+  margin-top:0;
+}
+
+/* SECTIONS */
+section { 
+  padding:60px 10%; 
+}
+
+h2 { 
+  margin-bottom:30px; 
+  text-align:center; 
+  font-size:2rem; 
+  color:#111;
+}
+
+/* SCHEDULE */
+.event-schedule { 
+  display:flex; 
+  flex-wrap: wrap; 
+  gap:20px; 
+  justify-content:center;
+}
+
+.event-card { 
+  background:#fff; 
+  padding:25px; 
+  border-radius:15px; 
+  flex:1 1 250px; 
+  max-width:300px; 
+  box-shadow:0 8px 20px rgba(0,0,0,0.15); 
+  transition: transform .3s, box-shadow .3s;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow:0 12px 25px rgba(0,0,0,0.2);
+}
+
+.event-card h3 { 
+  margin-bottom:10px; 
+  color:#2193b0;
+}
+
+/* GALLERY */
+.event-gallery {
+  display:grid; 
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+  gap:20px; 
+}
+
+.gallery-item { 
+  background:#fff; 
+  padding:20px; 
+  border-radius:15px; 
+  box-shadow:0 8px 20px rgba(0,0,0,0.15); 
+  text-align:center;
+  transition: transform .3s, box-shadow .3s;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+}
+
+/* REGISTER */
+.register { 
+  background:#2193b0; 
+  color:#fff; 
+  padding:60px 20px; 
+  border-radius:20px; 
+  text-align:center;
+}
+
+.register h2 { 
+  color:#fff; 
+  margin-bottom:25px;
+}
+
+.register form { 
+  display:flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap:15px; 
+  max-width:400px; 
+  margin:0 auto;
+}
+
+.register input { 
+  width:100%; 
+  padding:12px 15px; 
+  border-radius:25px; 
+  border:none; 
+  outline:none;
+  font-size:1rem;
+}
+
+.register button { 
+  padding:14px 35px; 
+  border:none; 
+  border-radius:30px; 
+  background:#ff6b6b; 
+  color:#fff; 
+  font-size:1rem; 
+  cursor:pointer; 
+  transition: transform .3s, background .3s, box-shadow .3s;
+}
+
+.register button:hover { 
+  background:#ff4757; 
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  header h1 { font-size:2.2rem; }
+  header p { font-size:1rem; }
+  .event-card, .gallery-item { flex:1 1 100%; max-width:100%; }
+}
+
+/* ADDITIONAL STYLING AND INTERACTIONS */
+
+/* Smooth scrolling for anchor links if needed */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animated fade-in for event cards */
+.event-card, .gallery-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s forwards;
+}
+
+.event-card:nth-child(1), .gallery-item:nth-child(1) { animation-delay: 0.2s; }
+.event-card:nth-child(2), .gallery-item:nth-child(2) { animation-delay: 0.4s; }
+.event-card:nth-child(3), .gallery-item:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Fancy input focus effect */
+.register input:focus {
+  box-shadow: 0 0 10px rgba(255,107,107,0.6);
+}
+
+/* Speakers / Tickets / FAQ Cards */
+.speakers .event-card, .tickets .event-card {
+  background:#fff;
+  padding:20px;
+  border-radius:15px;
+  margin-bottom:15px;
+  box-shadow:0 6px 15px rgba(0,0,0,0.1);
+}
+
+.faqs { padding:40px 10%; background:#e0f0ff; border-radius:15px; margin-top:30px; }
+.faq-question {
+  width:100%; 
+  text-align:left; 
+  background:#2193b0; 
+  color:#fff; 
+  padding:12px 20px; 
+  border:none; 
+  border-radius:10px; 
+  cursor:pointer; 
+  margin-bottom:5px;
+}
+.faq-answer { display:none; padding:10px 20px; background:#d0e7ff; border-radius:8px; margin-bottom:10px; }
+
+/* Highlight current session */
+.event-card.current {
+  border: 3px solid #ff6b6b;
+  box-shadow: 0 0 15px #ff6b6b;
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+}
+</style>
+<style>
+/* Dark Mode */
+body.dark-mode {
+  background:#1e1e1e;
+  color:#ddd;
+}
+body.dark-mode header { background: linear-gradient(135deg,#444c56,#2b2f36); color:#fff; }
+body.dark-mode .event-card, body.dark-mode .faq-answer, body.dark-mode .tickets .event-card, body.dark-mode .speakers .event-card { background:#2a2a2a; color:#eee; box-shadow:0 6px 15px rgba(0,0,0,0.5); }
+body.dark-mode .register { background:#2b2f36; color:#fff; }
+body.dark-mode .register button { background:#ff6b6b; color:#fff; }
+
+/* Section fade-in on scroll */
+section { opacity:0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+section.visible { opacity:1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<button id="dark-mode-toggle" style="position:fixed; top:20px; left:20px; padding:10px 20px; border:none; border-radius:10px; background:#2193b0; color:#fff; cursor:pointer; z-index:1000;">Dark Mode</button>
+
+<header>
+  <h1>Conference 2026</h1>
+  <p>Join us for an unforgettable event experience!</p>
+</header>
+
+<!-- Countdown Timer -->
+<div id="countdown" style="text-align:center; font-size:2rem; margin-top:20px; color:#bbbbbb; font-weight:bold; text-shadow: 2px 2px 6px rgba(0,0,0,0.5);"></div>
+
+<!-- Event Schedule -->
+<section class="event-schedule">
+  <h2>Event Schedule</h2>
+  <div class="event-card" data-start="10:00" data-end="11:00">
+    <h3>Opening Ceremony</h3>
+    <p>10:00 AM - 11:00 AM</p>
+  </div>
+  <div class="event-card" data-start="11:15" data-end="12:30">
+    <h3>Workshop: Web Design</h3>
+    <p>11:15 AM - 12:30 PM</p>
+  </div>
+  <div class="event-card" data-start="12:30" data-end="13:30">
+    <h3>Networking Lunch</h3>
+    <p>12:30 PM - 1:30 PM</p>
+  </div>
+</section>
+
+<!-- Speakers Section -->
+<section class="speakers">
+  <h2>Speakers</h2>
+  <div class="event-schedule">
+    <div class="event-card">
+      <h3>Jane Doe</h3>
+      <p>Keynote: Future of Web Design</p>
+    </div>
+    <div class="event-card">
+      <h3>John Smith</h3>
+      <p>Workshop: JavaScript Mastery</p>
+    </div>
+    <div class="event-card">
+      <h3>Emily White</h3>
+      <p>Panel: UI/UX Best Practices</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQs Section -->
+<section class="faqs">
+  <h2>FAQs</h2>
+  <div class="faq-item">
+    <button class="faq-question">Where is the event?</button>
+    <div class="faq-answer">The event will be held online and in-person at Conference Center XYZ.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-question">How do I register?</button>
+    <div class="faq-answer">Fill out the registration form below or click the "Register Now" button.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-question">Is there a dress code?</button>
+    <div class="faq-answer">Casual or business casual is recommended.</div>
+  </div>
+</section>
+
+<!-- Ticket / Pricing Section -->
+<section class="tickets">
+  <h2>Tickets & Pricing</h2>
+  <div class="event-schedule">
+    <div class="event-card">
+      <h3>General Admission</h3>
+      <p>$50</p>
+    </div>
+    <div class="event-card">
+      <h3>VIP Pass</h3>
+      <p>$100</p>
+    </div>
+    <div class="event-card">
+      <h3>Workshop Only</h3>
+      <p>$30</p>
+    </div>
+  </div>
+</section>
+
+<section class="register">
+  <h2>Register Now</h2>
+  <form id="register-form">
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <button type="submit">Sign Up</button>
+  </form>
+</section>
+
+<!-- Sticky Register Button -->
+<button id="sticky-register" style="position:fixed; bottom:20px; right:20px; padding:15px 25px; border:none; border-radius:25px; background:#ff6b6b; color:#fff; font-size:1rem; cursor:pointer; z-index:1000;" onclick="document.getElementById('register-form').scrollIntoView({behavior:'smooth'});">Register Now</button>
+
+<script>
+// Countdown Timer
+const eventDate = new Date("2026-06-15T10:00:00").getTime();
+function updateCountdown() {
+  const now = new Date().getTime();
+  const diff = eventDate - now;
+  if(diff < 0) {
+    document.getElementById("countdown").innerText = "The event has started!";
+    clearInterval(countdownInterval);
+    return;
+  }
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+  const seconds = Math.floor((diff % (1000*60)) / 1000);
+  document.getElementById("countdown").innerText = 
+    `${days}d ${hours}h ${minutes}m ${seconds}s until event starts`;
+}
+const countdownInterval = setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// FAQ toggle
+const faqs = document.querySelectorAll('.faq-question');
+faqs.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const answer = btn.nextElementSibling;
+    if(answer.style.display === 'block'){
+      answer.style.display = 'none';
+    } else {
+      // close others
+      document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+      answer.style.display = 'block';
+    }
+  });
+});
+
+// Interactive Schedule - highlight current session
+function highlightCurrentSession() {
+  const now = new Date();
+  const currentHours = now.getHours();
+  const currentMinutes = now.getMinutes();
+
+  document.querySelectorAll('.event-schedule .event-card').forEach(card => {
+    const startStr = card.getAttribute('data-start');
+    const endStr = card.getAttribute('data-end');
+    if(!startStr || !endStr) {
+      card.classList.remove('current');
+      return;
+    }
+    const [startH, startM] = startStr.split(':').map(Number);
+    const [endH, endM] = endStr.split(':').map(Number);
+
+    const startTime = startH * 60 + startM;
+    const endTime = endH * 60 + endM;
+    const currentTime = currentHours * 60 + currentMinutes;
+
+    if(currentTime >= startTime && currentTime < endTime) {
+      card.classList.add('current');
+    } else {
+      card.classList.remove('current');
+    }
+  });
+}
+highlightCurrentSession();
+setInterval(highlightCurrentSession, 60000);
+</script>
+<script>
+// Dark Mode Toggle
+const toggleBtn = document.getElementById('dark-mode-toggle');
+toggleBtn.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+  toggleBtn.innerText = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+});
+
+// Scroll Animation
+function revealOnScroll() {
+  const sections = document.querySelectorAll('section');
+  const windowHeight = window.innerHeight;
+  sections.forEach(section => {
+    const top = section.getBoundingClientRect().top;
+    if(top < windowHeight - 100) {
+      section.classList.add('visible');
+    }
+  });
+}
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
+</script>
+
+</body>
+</html>
